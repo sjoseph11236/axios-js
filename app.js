@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const form = document.querySelector('form');
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 const  getTodos = async () => {
@@ -11,6 +12,27 @@ const  getTodos = async () => {
     console.log(`GET: Here's the list of todos `, todos);
 
     return todos;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const addTodo = async todo => { 
+  try {
+    const { data } = await axios.post(`${BASE_URL}/todos`, todo);
+    const addedTodo = data;
+
+    console.log(`Added a new Todo`, addedTodo);
+
+    return addedTodo;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const deleteTodo = async id => { 
+  try {
+    
   } catch (error) {
     console.error(error);
   }
@@ -43,3 +65,19 @@ const main = async () => {
 }; 
 
 main();
+
+
+const formEvent = form.addEventListener('submit', async event => { 
+  event.preventDefault();
+  
+  const title = document.querySelector('#new-todos__title').value;
+  const userId = document.querySelector('#new-todos__userId').value;
+
+  const todo = { 
+    title,
+    userId
+  }
+
+  const addedTodo = await addTodo(todo);
+  addTodosToDOM(addedTodo);
+});

@@ -1883,6 +1883,11 @@ module.exports = require('./lib/axios');
 },{"./lib/axios":"node_modules/axios/lib/axios.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteTodo = exports.addTodo = void 0;
+
 var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1891,6 +1896,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var form = document.querySelector('form');
 var BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 var getTodos = /*#__PURE__*/function () {
@@ -1930,6 +1936,70 @@ var getTodos = /*#__PURE__*/function () {
   };
 }();
 
+var addTodo = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(todo) {
+    var _yield$axios$post, data, addedTodo;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return _axios.default.post("".concat(BASE_URL, "/todos"), todo);
+
+          case 3:
+            _yield$axios$post = _context2.sent;
+            data = _yield$axios$post.data;
+            addedTodo = data;
+            console.log("Added a new Todo", addedTodo);
+            return _context2.abrupt("return", addedTodo);
+
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2["catch"](0);
+            console.error(_context2.t0);
+
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 10]]);
+  }));
+
+  return function addTodo(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.addTodo = addTodo;
+
+var deleteTodo = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            try {} catch (error) {
+              console.error(error);
+            }
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function deleteTodo(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.deleteTodo = deleteTodo;
+
 var createLi = function createLi(item) {
   var li = document.createElement('li');
   li.appendChild(document.createTextNode(item.title));
@@ -1949,33 +2019,66 @@ var addTodosToDom = function addTodosToDom(todos) {
 };
 
 var main = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            _context2.t0 = addTodosToDom;
-            _context2.next = 3;
+            _context4.t0 = addTodosToDom;
+            _context4.next = 3;
             return getTodos();
 
           case 3:
-            _context2.t1 = _context2.sent;
-            (0, _context2.t0)(_context2.t1);
+            _context4.t1 = _context4.sent;
+            (0, _context4.t0)(_context4.t1);
 
           case 5:
           case "end":
-            return _context2.stop();
+            return _context4.stop();
         }
       }
-    }, _callee2);
+    }, _callee4);
   }));
 
   return function main() {
-    return _ref2.apply(this, arguments);
+    return _ref4.apply(this, arguments);
   };
 }();
 
 main();
+var formEvent = form.addEventListener('submit', /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event) {
+    var title, userId, todo, addedTodo;
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            event.preventDefault();
+            title = document.querySelector('#new-todos__title').value;
+            userId = document.querySelector('#new-todos__userId').value;
+            todo = {
+              title: title,
+              userId: userId
+            };
+            _context5.next = 6;
+            return addTodo(todo);
+
+          case 6:
+            addedTodo = _context5.sent;
+            addTodosToDOM(addedTodo);
+
+          case 8:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function (_x3) {
+    return _ref5.apply(this, arguments);
+  };
+}());
 },{"axios":"node_modules/axios/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
