@@ -32,7 +32,11 @@ export const addTodo = async todo => {
 
 export const deleteTodo = async id => { 
   try {
+    const { data } = await axios.delete(`${BASE_URL}/todos/${id}`);
+
+    console.log('Deleted Todo ID: ', id);
     
+    return data;
   } catch (error) {
     console.error(error);
   }

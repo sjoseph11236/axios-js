@@ -1977,20 +1977,33 @@ exports.addTodo = addTodo;
 
 var deleteTodo = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
+    var _yield$axios$delete, data;
+
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            try {} catch (error) {
-              console.error(error);
-            }
+            _context3.prev = 0;
+            _context3.next = 3;
+            return _axios.default.delete("".concat(BASE_URL, "/todos/").concat(id));
 
-          case 1:
+          case 3:
+            _yield$axios$delete = _context3.sent;
+            data = _yield$axios$delete.data;
+            console.log('Deleted Todo ID: ', id);
+            return _context3.abrupt("return", data);
+
+          case 9:
+            _context3.prev = 9;
+            _context3.t0 = _context3["catch"](0);
+            console.error(_context3.t0);
+
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3);
+    }, _callee3, null, [[0, 9]]);
   }));
 
   return function deleteTodo(_x2) {
