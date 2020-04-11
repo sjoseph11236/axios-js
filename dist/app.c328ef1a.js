@@ -1929,6 +1929,53 @@ var getTodos = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+
+var createLi = function createLi(item) {
+  var li = document.createElement('li');
+  li.appendChild(document.createTextNode(item.title));
+  return li;
+};
+
+var addTodosToDom = function addTodosToDom(todos) {
+  var ul = document.querySelector('ul');
+
+  if (Array.isArray(todos) && todos.length > 0) {
+    todos.map(function (todo) {
+      ul.appendChild(createLi(todo));
+    });
+  } else if (todos) {
+    ul.appendChild(createLi(todos));
+  }
+};
+
+var main = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.t0 = addTodosToDom;
+            _context2.next = 3;
+            return getTodos();
+
+          case 3:
+            _context2.t1 = _context2.sent;
+            (0, _context2.t0)(_context2.t1);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function main() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+main();
 },{"axios":"node_modules/axios/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
